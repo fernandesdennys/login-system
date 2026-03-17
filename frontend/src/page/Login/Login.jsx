@@ -3,6 +3,8 @@ import './Login.css';
 
 function Login() {
   return (
+    <html>
+      <body>        
     <div className='container'>
       <form >
         <h1>Login to your Account</h1>
@@ -14,7 +16,7 @@ function Login() {
 
           <div className='input-field'>
             <label>Password: </label>
-            <input type="passworld" name="" id="" placeholder='Enter your password' required/>
+            <input type="passworld" name="" id="" placeholder='enter your password' required/>
             <FaLock className="icon"/>
           </div>
           <button>Submit</button>
@@ -23,6 +25,8 @@ function Login() {
           <a href="#">Esqueci minha senha!</a>
       </form>
     </div>
+      </body>
+    </html>
   );
 }
 export default Login;

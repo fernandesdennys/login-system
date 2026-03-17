@@ -1,9 +1,3 @@
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
 .App {
   display: flex;
   justify-content: center;
@@ -15,35 +9,50 @@
 }
 .container {
   margin: auto;
-  width: 450px;
+  width: 550px;
   border-radius: 30px;
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(15px);
   flex-direction: column;
-  display: flex;
   align-items: center;
+  display: flex;
 }
 .container h1 {
-  font-size: 40px;
+  font-size: 30px;
+  color: rgba(255, 255, 255);
+  text-shadow:  black 3px 3px 5px
+}
+.container label {
+  display: flex;
+  justify-content: center;
+  font-size: large;
+  color: rgba(255, 255, 255);
+  text-shadow:  black 3px 3px 5px;
+  margin-bottom: 5px;
 }
 .container .input-field {
   position: relative;
-  width: 80%;
+  width: 100%;
   height: 50px;
-  margin: 20px auto;
+  margin: 40px auto;
 }
 .input-field input {
   width: 100%;
   height: 100%;
   background-color: transparent;
   outline: none;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.15);
   border-radius: 40px;
-  color: #fff;
   padding: 20px 45px;
 }
 .input-field input::placeholder {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.3);
+}
+.icon {
+  position: absolute;
+  right: 5%;
+  top: 80%;
+  transform: translate(-50%);
 }
 
 
