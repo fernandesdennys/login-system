@@ -1,22 +1,28 @@
+import {FaUser, FaLock} from "react-icons/fa";
 import './Login.css';
 
 function Login() {
   return (
-    <section>
-      <div>
-        <h1>Login-System</h1>
-      </div>
-      <div>
-        <input type="username" name="" id="" />
-        <input type="passworld" name="" id="" />
-        <button>Entrar</button>
-      </div>
-      <div>
-        <p>Nao tem um conta ?</p>
-        <a href="#">Criar conta</a>
-        <a href="#">Esqueci minha senha!</a>
-      </div>
-    </section>
+    <div className='container'>
+      <form >
+        <h1>Login to your Account</h1>
+        <div className='input-field'>
+          <label>Login: </label>
+          <input type="email" name="" id="" placeholder='example@email.com' required/>
+          <FaUser className="icon"/>
+        </div>
+
+          <div className='input-field'>
+            <label>Password: </label>
+            <input type="passworld" name="" id="" placeholder='Enter your password' required/>
+            <FaLock className="icon"/>
+          </div>
+          <button>Submit</button>
+          <p>Nao tem um conta ?</p>
+          <a href="#">Criar conta</a>
+          <a href="#">Esqueci minha senha!</a>
+      </form>
+    </div>
   );
 }
 export default Login;
