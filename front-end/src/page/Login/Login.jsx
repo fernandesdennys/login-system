@@ -3,8 +3,6 @@ import './Login.css';
 
 function Login() {
   return (
-    <html>
-      <body>        
     <div className='container'>
       <form >
         <h1>Login to your Account</h1>
@@ -25,8 +23,7 @@ function Login() {
           <a href="#">Esqueci minha senha!</a>
       </form>
     </div>
-      </body>
-    </html>
+
   );
 }
 export default Login;
