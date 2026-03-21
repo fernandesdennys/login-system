@@ -3,7 +3,7 @@
   justify-content: center;
   min-height: 100vh;
   align-items: center;
-  background-image: url("/src/assets/Abstract-fire-black-background_2880x1800.jpg");
+  background-image: url("/src/assets/Abstract1.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -13,9 +13,9 @@
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.10);
   box-shadow:  inset 2px 2px 3px #b9b9b9;
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(1px);
   flex-direction: column;
   align-items: center;
   display: flex;

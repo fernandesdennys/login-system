@@ -1,5 +1,6 @@
 import {FaUser, FaLock} from "react-icons/fa";
 import './Login.css';
+import { Link } from "react-router-dom";
 
 function Login() {
   return (
@@ -21,7 +22,7 @@ function Login() {
             <button className="btn-login">LOGIN</button>
           </div>
           <div className="text-register">
-            <a href="#">Create account</a>
+            <a href="./register">Create account</a>
             <a href="#" className="link">Forgot Password?</a>
           </div>
       </form>
