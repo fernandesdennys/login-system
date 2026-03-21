@@ -5,22 +5,25 @@ function Login() {
   return (
     <div className='container'>
       <form >
-        <h1>Login to your Account</h1>
+
+        <h1>LOGIN</h1>
         <div className='input-field'>
-          <label>Login: </label>
-          <input type="email" name="" id="" placeholder='example@email.com' required/>
+          <input type="email" name="" id="" placeholder='Username' required/>
           <FaUser className="icon"/>
         </div>
 
           <div className='input-field'>
-            <label>Password: </label>
-            <input type="passworld" name="" id="" placeholder='enter your password' required/>
+            <input type="passworld" name="" id="" placeholder='Password' required/>
             <FaLock className="icon"/>
           </div>
-          <button>Submit</button>
-          <p>Nao tem um conta ?</p>
-          <a href="#">Criar conta</a>
-          <a href="#">Esqueci minha senha!</a>
+
+          <div className="box-button">
+            <button className="btn-login">LOGIN</button>
+          </div>
+          <div className="text-register">
+            <a href="#">Create account</a>
+            <a href="#" className="link">Forgot Password?</a>
+          </div>
       </form>
     </div>
 
