@@ -1,56 +1,25 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import Login from './pages/login/Login';
-import Register from './pages/register/Register';
-import './App.css';
-
-function AppContent() {
-  const location = useLocation();
-  const isRegister = location.pathname === "/register"
-
-  return (
-    <div
-      className={`App ${isRegister ? 'bg-register' : 'bg-login'}`}
-    >
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route
-            path="/"
-            element={
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 2, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.7 }}
-              >
-                <Login />
-              </motion.div>
-            }
-          />
-
-          <Route
-            path="/register"
-            element={
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 2, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.7 }}
-              >
-                <Register />
-              </motion.div>
-            }
-          />
-        </Routes>
-      </AnimatePresence>
-    </div>
-  );
-}
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/auth/login/Login";
+import Register from "./pages/auth/register/Register";
+import Home from './pages/home/Home';
+import About from './pages/about/About';
+import Contact from './pages/contact/Contact';
+import Products from './pages/products/Products';
+import "./App.css";
 
 function App() {
   return (
     <BrowserRouter>
-      <AppContent />
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/products" element={<Products />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
