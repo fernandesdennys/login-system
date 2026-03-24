@@ -3,7 +3,6 @@ package io.github.fernandesdennys.back_end.entities;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -23,7 +22,7 @@ public class User {
     @JoinTable(name = "tb_user_role",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    private final Set<Role> roles = new HashSet<>();
 
     public User() {
     }
@@ -75,25 +74,23 @@ public class User {
         roles.add(role);
     }
 
-    public boolean hasRole(String roleName) {
-        for (Role role : roles) {
-            if (role.getAuthority().equals(roleName)) {
-                return true;
-            }
-        }
-        return false;
+    public void removeRole(Role role) {
+        roles.remove(role);
+    }
+
+    public boolean hasRole(Role roleName) {
+       return roles.contains(roleName);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-        return Objects.equals(id, user.id);
+        if (this == o) return true;
+        if (!(o instanceof User other)) return false;
+        return id != null && id.equals(other.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return getClass().hashCode();
     }
 }
