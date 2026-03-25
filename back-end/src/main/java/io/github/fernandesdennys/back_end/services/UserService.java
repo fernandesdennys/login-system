@@ -22,7 +22,7 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<UserDTO> findAllPaged(Pageable pageable) {
         Page<User> users = repository.findAll(pageable);
         return users.map(UserDTO::new);
@@ -33,6 +33,16 @@ public class UserService {
         User entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "User not found. Id: " + id));
+        return new UserDTO(entity);
+    }
+
+    @Transactional
+    public UserDTO insert(UserDTO dto) {
+        User entity = new User();
+        entity.setName(dto.getName());
+        entity.setEmail(dto.getEmail());
+
+        repository.save(entity);
         return new UserDTO(entity);
     }
 }
