@@ -6,8 +6,12 @@ import io.github.fernandesdennys.back_end.exceptions.ResourceNotFoundException;
 import io.github.fernandesdennys.back_end.repositories.RoleRepository;
 import io.github.fernandesdennys.back_end.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -17,6 +21,12 @@ public class UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Transactional
+    public Page<UserDTO> findAllPaged(Pageable pageable) {
+        Page<User> users = repository.findAll(pageable);
+        return users.map(UserDTO::new);
+    }
 
     @Transactional(readOnly = true)
     public UserDTO findById(Long id) {
