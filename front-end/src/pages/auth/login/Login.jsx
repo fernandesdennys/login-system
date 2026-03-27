@@ -1,7 +1,7 @@
 import { FaUser, FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { loginRequest } from "../services/api";
+import { loginRequest } from "../../../services/api";
 import "./Login.css";
 
 function Login() {
