@@ -1,9 +1,7 @@
 package io.github.fernandesdennys.back_end.dto;
 
-import io.github.fernandesdennys.back_end.validation.UserInsertValid;
 import jakarta.validation.constraints.NotBlank;
 
-@UserInsertValid
 public class UserInsertDTO extends UserDTO {
 
     @NotBlank
