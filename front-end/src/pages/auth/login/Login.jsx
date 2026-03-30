@@ -14,9 +14,13 @@ function Login() {
 
     try {
       const data = await loginRequest(email, password);
-      console.log(data);
+      console.log("Resposta da API", data);
+      
+      if (!data.token) {
+        throw new Error("Token não recebido do servidor")
+      }
 
-      localStorage.setItem("token", data.token || "fake-token");
+      localStorage.setItem("token", data.token);
       navigate("/dashboard");
     } catch (error) {
       console.error("Erro:", error);
@@ -32,7 +36,7 @@ function Login() {
         {/* USERNAME */}
         <div className="input-field relative text-white">
           <input
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder=" "
