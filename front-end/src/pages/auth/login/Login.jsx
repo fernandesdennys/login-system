@@ -19,9 +19,11 @@ function Login() {
       if (!data.token) {
         throw new Error("Token não recebido do servidor")
       }
+      localStorage.setItem("token", "fake-token");
 
-      localStorage.setItem("token", data.token);
-      navigate("/dashboard");
+  window.location.href = "/dashboard";
+      /* localStorage.setItem("token", data.token);
+      navigate("/dashboard") */;
     } catch (error) {
       console.error("Erro:", error);
       alert(error.message);
