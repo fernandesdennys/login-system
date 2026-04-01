@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,6 +31,7 @@ public class ResourceServerConfig {
     @Value("${cors.origins}")
     private String corsOrigins;
 
+    // 🔹 H2 console liberado no profile test
     @Bean
     @Profile("test")
     @Order(1)
@@ -46,27 +46,51 @@ public class ResourceServerConfig {
         return http.build();
     }
 
+    // 🔹 RESOURCE SERVER (PROTEÇÃO REAL)
     @Bean
     @Order(3)
     public SecurityFilterChain rsSecurityFilterChain(HttpSecurity http) throws Exception {
+
         http.csrf(AbstractHttpConfigurer::disable);
-        http.authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
-        http.oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
+
+        http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/oauth2/**").permitAll() // necessário pro auth server
+                .requestMatchers("/h2-console/**").permitAll()
+                .requestMatchers("/users/**").hasRole("ADMIN") // 🔥 proteção real
+                .requestMatchers("/users/**").hasRole("CLIENT") // 🔥 proteção real
+                .anyRequest().authenticated()
+        );
+
+        http.oauth2ResourceServer(oauth2 ->
+                oauth2.jwt(jwt ->
+                        jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())
+                )
+        );
+
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
+
         return http.build();
     }
 
+    // 🔹 CONVERSOR DE AUTHORITIES DO JWT
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        grantedAuthoritiesConverter.setAuthoritiesClaimName("authorities");
-        grantedAuthoritiesConverter.setAuthorityPrefix("");
 
-        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
-        return jwtAuthenticationConverter;
+        JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter =
+                new JwtGrantedAuthoritiesConverter();
+
+        grantedAuthoritiesConverter.setAuthoritiesClaimName("authorities");
+        grantedAuthoritiesConverter.setAuthorityPrefix(""); // NÃO adicionar ROLE_
+
+        JwtAuthenticationConverter authenticationConverter =
+                new JwtAuthenticationConverter();
+
+        authenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
+
+        return authenticationConverter;
     }
 
+    // 🔹 CORS
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
 
@@ -85,10 +109,9 @@ public class ResourceServerConfig {
 
     @Bean
     FilterRegistrationBean<CorsFilter> filterRegistrationBeanCorsFilter() {
-        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
-                new CorsFilter(corsConfigurationSource()));
+        FilterRegistrationBean<CorsFilter> bean =
+                new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
     }
 }
-

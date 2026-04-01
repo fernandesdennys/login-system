@@ -72,7 +72,8 @@ public class AuthorizationServerConfig {
 
         http
                 .securityMatcher("/oauth2/**", "/.well-known/**")
-                .with(configurer, Customizer.withDefaults());
+                .with(configurer, Customizer.withDefaults())
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/oauth2/**"));
 
         configurer
                 .tokenEndpoint(tokenEndpoint -> tokenEndpoint
