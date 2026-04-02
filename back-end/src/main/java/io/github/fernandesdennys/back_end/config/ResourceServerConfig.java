@@ -56,8 +56,8 @@ public class ResourceServerConfig {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/oauth2/**").permitAll() // necessário pro auth server
                 .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/users/**").hasRole("ADMIN") // 🔥 proteção real
-                .requestMatchers("/users/**").hasRole("CLIENT") // 🔥 proteção real
+                .requestMatchers("/users/**").hasRole("ADMIN")
+                .requestMatchers("/users/**").hasRole("CLIENT")
                 .anyRequest().authenticated()
         );
 
