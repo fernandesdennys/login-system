@@ -18,26 +18,33 @@
   return data;
 } */
 
-export async function loginRequest() {
-  const response = await fetch("http://localhost:8080/users", {
-    method: "GET",
+export async function loginRequest(email, password) {
+  const response = await fetch("http://localhost:8080/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
   });
 
-  console.log("Status:", response.status); // 👈 status HTTP
+  console.log("Status:", response.status);
 
-  const text = await response.text(); // 👈 pega como texto
+  const text = await response.text();
   console.log("Resposta bruta:", text);
 
-  // tenta converter pra JSON depois
   let data;
   try {
     data = JSON.parse(text);
   } catch (e) {
-    throw new Error("Resposta não é um JSON válido");
+    // se não for JSON (ex: "login funcionando")
+    return text;
   }
 
   if (!response.ok) {
-    throw new Error(data.message || "Erro ao buscar usuários");
+    throw new Error(data.message || "Erro no login");
   }
 
   return data;

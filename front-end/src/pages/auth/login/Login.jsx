@@ -14,19 +14,24 @@ function Login() {
 
     try {
       const data = await loginRequest(email, password);
-      console.log("Resposta da API", data);
-      
-      if (!data.token) {
-        throw new Error("Token não recebido do servidor")
-      }
-      localStorage.setItem("token", "fake-token");
 
-  window.location.href = "/dashboard";
-      /* localStorage.setItem("token", data.token);
-      navigate("/dashboard") */;
+      console.log("DATA COMPLETA:", data);
+
+      if (!data || !data.token) {
+        throw new Error("Token não recebido do servidor");
+      }
+
+      // salva token real
+      localStorage.setItem("token", data.token);
+
+      // redireciona
+      navigate("/dashboard");
     } catch (error) {
-      console.error("Erro:", error);
-      alert(error.message);
+      console.error("Erro completo:", error);
+      console.error("Resposta:", error.response);
+      console.error("Dados:", error.response?.data);
+
+      alert(error.response?.data?.message || error.message);
     }
   }
 
