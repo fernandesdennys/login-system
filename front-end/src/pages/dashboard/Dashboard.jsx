@@ -10,11 +10,11 @@ function Dashboard() {
 
   return (
     <div className="p-20px">
-      <h1>Dashboard</h1>
+      <h1>Dashboardssss</h1>
       <p>Você está logado!</p>
 
       <button onClick={handleLogout}>
-        Logout
+        Logoutddsas
       </button>
     </div>
   );

@@ -1,17 +1,9 @@
 import "./Register.css"
+import { Link } from 'react-router-dom';
 
 function Register() {
 return (
   <div>
-    <header className="main-header bg-white/20 w-screen text-[20px] text-white h-20 flex justify-around items-center fixed top-0 left-0 backdrop-blur-sm hover:">
-      <a href="./Home">HOME</a>
-      <p className="text-[40px]">|</p>
-      <a href="./About">ABOUT</a>
-      <p  className="text-[40px]">|</p>
-      <a href="./Contact">CONTACT</a>
-      <p  className="text-[40px]">|</p>
-      <a href="./Products">PRODUCTS</a>
-    </header>
     <form>
     <h1 className="cadastro"> CADASTRO</h1>
     </form>
