@@ -31,7 +31,6 @@ public class ResourceServerConfig {
     @Value("${cors.origins}")
     private String corsOrigins;
 
-    // 🔹 H2 console liberado no profile test
     @Bean
     @Profile("test")
     @Order(1)
@@ -46,7 +45,6 @@ public class ResourceServerConfig {
         return http.build();
     }
 
-    // 🔹 RESOURCE SERVER (PROTEÇÃO REAL)
     @Bean
     @Order(3)
     public SecurityFilterChain rsSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -56,7 +54,7 @@ public class ResourceServerConfig {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/oauth2/**").permitAll() // necessário pro auth server
                 .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/auth/**").permitAll() // 🔥 LIBERA LOGIN AQUI
+                .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/users/**").hasRole("ADMIN")
                 .requestMatchers("/users/**").hasRole("CLIENT")
                 .anyRequest().authenticated()
