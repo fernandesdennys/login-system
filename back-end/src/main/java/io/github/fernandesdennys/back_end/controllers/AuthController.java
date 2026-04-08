@@ -39,7 +39,7 @@ public class AuthController {
 
     // ✅ LOGIN FUNCIONANDO (AGORA RETORNA JSON COM TOKEN)
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDTO body) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO body) {
 
         UsernamePasswordAuthenticationToken authToken =
                 new UsernamePasswordAuthenticationToken(body.getEmail(), body.getPassword());
