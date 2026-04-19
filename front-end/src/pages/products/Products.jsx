@@ -1,9 +1,10 @@
+import Header from '../../Components/Header'
 import './Products.css'
 
 function Products() {
   return (
     <div>
-      <h1>PRODUCTS</h1>
+      <h1>Contacts</h1>
     </div>
   )
 }

@@ -9,12 +9,12 @@ function Dashboard() {
   }
 
   return (
-    <div className="p-20px">
-      <h1>Dashboardssss</h1>
+    <div>
+      <h1>Dashboard</h1>
       <p>Você está logado!</p>
 
       <button onClick={handleLogout}>
-        Logoutddsas
+        Logout
       </button>
     </div>
   );

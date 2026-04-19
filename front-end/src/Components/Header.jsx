@@ -1,13 +1,32 @@
+import { NavLink } from "react-router-dom";
+
 function Header() {
+  const links = [
+    { name: "Dashboard", path: "/dashboard" },
+    { name: "Home", path: "/home" },
+    { name: "Perfil", path: "/perfil" },
+    { name: "Contact", path: "/contact" },
+    { name: "Products", path: "/products" },
+  ];
+
   return (
-    <header className="main-header bg-white/20 w-screen text-[20px] text-white h-20 flex justify-around items-center fixed top-0 left-0 backdrop-blur-sm">
-      <a href="/home">HOME</a>
-      <p className="text-[40px]">|</p>
-      <a href="/about">ABOUT</a>
-      <p className="text-[40px]">|</p>
-      <a href="/contact">CONTACT</a>
-      <p className="text-[40px]">|</p>
-      <a href="/products">PRODUCTS</a>
+    <header className="main-header bg-white/30 w-[80%] text-[25px] rounded-full text-white h-20 flex items-center justify-center gap-20 fixed top-5 backdrop-blur-lg border overflow-hidden">
+      
+      {links.map((link) => (
+        <NavLink
+          key={link.path}
+          to={link.path}
+          className={({ isActive }) => ` ${
+    isActive
+      ? "text-black  rounded-full w-70 flex justify-center backdrop-blur-sm border border-white font-bold"
+      : "text-white hover:text-black "
+  }`
+}
+        >
+          {link.name}
+        </NavLink>
+      ))}
+
     </header>
   );
 }

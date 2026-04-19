@@ -1,9 +1,10 @@
+import Header from '../../Components/Header'
 import './Contact.css'
 
 function Contact() {
   return (
     <div>
-      <h1>CONTACT</h1>
+      <h1>Contact</h1>
     </div>
   )
 }
